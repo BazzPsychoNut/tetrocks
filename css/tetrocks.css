@@ -1,0 +1,15 @@
+body 					{ background-color:#e8e8e8; margin:0; padding:0; }
+div#canvas_container	{ position:relative; width:320px; height:480px; margin:30px auto; }
+canvas					{ position:absolute; left:0px; top:0px; width:320px; height:480px; }
+canvas#background		{ z-index:1; }
+canvas#canvas			{ z-index:2; }
+canvas#explosion		{ z-index:3; }
+canvas#score			{ z-index:4; }
+canvas#popup			{ z-index:5; }
+
+div#explanation			{ width:500px; margin:0 auto; text-align:center; }
+
+@font-face {
+    font-family: 'control_freak';
+    src: url('contf.ttf');
+}

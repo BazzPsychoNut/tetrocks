@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Tetrocks</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/tetrocks.css">
+        
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div id="canvas_container"> 
+        	<canvas id="background" width="320px" height="480px"></canvas>
+        	<canvas id="canvas" width="320px" height="480px" tabindex="1"></canvas>
+        	<canvas id="explosion" width="320px" height="480px"></canvas>
+        	<canvas id="score" width="320px" height="480px"></canvas>
+        	<canvas id="popup" width="320px" height="480px"></canvas>
+    	</div>
+    	
+    	<div id="explanation">
+    		Form blocks of at least 3x3 tiles to remove them.<br/>
+    		Score more points by removing more tiles of the same color.
+    	</div>
+
+		<!-- jquery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/vendor/jcanvas.min.js"></script>
+        
+        <!-- the actual html5 core js classes -->
+        <script src="js/init.js"></script>
+        <script src="js/core.js"></script>
+        <script src="js/sound_effects.js"></script>
+        <script src="js/spritesheet.js"></script>
+        <script src="js/explosion_spritesheet.js"></script>
+        <script src="js/blocks_creator.js"></script>
+        <script src="js/board.js"></script>
+        <script src="js/game_engine.js"></script>
+        <script src="js/input_engine.js"></script>
+        
+        <!-- the script to start everything -->
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-?????-? to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-?????-?'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
