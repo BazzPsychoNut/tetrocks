@@ -29,8 +29,8 @@ GameEngineClass = Class.extend({
 	
 	// timer, amount of microseconds you have to place a block and boolean indicator if game is currently paused or not
 	timer: null,
-	time_to_place_block: 6000,
-	time_left: 6000,
+	time_to_place_block: 9000,
+	time_left: 9000,
 	paused: false,
 	
 	// collect the tiles with bombs and blobs found when removing tiles in here

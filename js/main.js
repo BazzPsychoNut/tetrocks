@@ -1,20 +1,37 @@
 /**
  * start the game 
  */
-$(document).ready(function() {
+$(document).ready(function() 
+{
+	// TODO start with loading screen
 
-	// TODO Make sure all images are loaded before we start the game...
-//	var img = new Image();
-//	img.src = 'img/tetris_tiles_20.png';
-//	
-//	var img2 = new Image();
-////	img2.onLoad = function() {
-////		game.new_game();
-////	};
-//	img2.src = 'img/explosprite.png';
+	// the actual game scripts
+	var game_scripts = [
+	    "js/init.js",
+	    "js/core.js",
+	    "js/sound_effects.js",
+	    "js/spritesheet.js",
+	    "js/explosion_spritesheet.js",
+	    "js/blocks_creator.js",
+	    "js/board.js",
+	    "js/game_engine.js",
+	    "js/input_engine.js"
+    ];
 	
-	// start new game
-	game.new_game();
+	var images = [
+	    'img/tetris_tiles_20.png', 
+	    'img/explosprite.png'
+    ];
+	
+	// load all scripts
+	loadAssets(game_scripts, function() {
+		// then load all images
+		loadAssets(images, function() {
+			// then start the game
+			game.new_game();
+		});
+	});
+	
 	
 	// for testing.. put bombs down
 	/*

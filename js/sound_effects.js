@@ -13,7 +13,7 @@ SoundEffectsClass = Class.extend({
 	file_extension: '',
 	
 	// sound on or off?
-	silent: true,
+	silent: false,
 	
 	// setup
 	setup: function() {
