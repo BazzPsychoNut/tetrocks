@@ -69,6 +69,7 @@ GameEngineClass = Class.extend({
 		game.reset_move_loop();
 		
 		// draw inital score of 0
+		game.total_score = 0;
 		board.draw_total_score(0);
 		
 		game.game_is_over = false;
@@ -264,7 +265,7 @@ GameEngineClass = Class.extend({
 	},
 	
 	/**
-	 * remove given tile from the current block
+	 * remove given tiles from the current block
 	 */
 	remove_tiles_from_block: function(tiles) 
 	{
@@ -279,10 +280,42 @@ GameEngineClass = Class.extend({
 				}
 			}
 		}
+		// by removing tiles, the topleft position might have shifted, so we need to move the block so, 
+		// that it will remain in the same place as we shift the tiles to the topleft.
+		game.tidy_block_tiles();
 		
 		// if no tiles left, then go to next block
 		if (game.block.tiles.length == 0)
 			game.roll_next_block();
+	},
+	
+	/**
+	 * Move all tiles to the top left
+	 * Move the block in the opposite direction to ensure it will remain in the same place on the board
+	 */
+	tidy_block_tiles: function()
+	{
+		var topleft = {'x':9, 'y':9};
+		for (var i=0; i<game.block.tiles.length; i++) {
+			var tile = game.block.tiles[i];
+			topleft.x = tile.x < topleft.x ? tile.x : topleft.x;
+			topleft.y = tile.y < topleft.y ? tile.y : topleft.y;
+		}
+		
+		if (topleft.x > 0) 
+		{
+			for (var i=0; i<game.block.tiles.length; i++)
+				game.block.tiles[i].x -= topleft.x;
+			
+			game.block_location.x += topleft.x;
+		}
+		if (topleft.y > 0) 
+		{
+			for (var i=0; i<game.block.tiles.length; i++)
+				game.block.tiles[i].y -= topleft.y;
+			
+			game.block_location.y += topleft.y;
+		}
 	},
 	
 	/**
@@ -563,12 +596,15 @@ GameEngineClass = Class.extend({
 		// first handle blobs
 		if (game.specials_to_execute.blobs.length) 
 		{
+			// TODO get blob sound
+			
 			for (var i=0; i<game.specials_to_execute.blobs.length; i++) {
 				var blob = game.specials_to_execute.blobs[i];
 				// put blobs on the surrounding free tiles
 				for (var x=blob.x-1; x<=blob.x+1; x++) {
 					for (var y=blob.y-1; y<=blob.y+1; y++) {
-						if (game.grid[x] && game.grid[x][y] && ! game.grid[x][y].color) {
+						// the grid coordinates must exist && there must not be a tile && it cannot be in the start area
+						if (game.grid[x] && game.grid[x][y] && ! game.grid[x][y].color && y >= 0) {
 							game.grid[x][y] = {"blob": true, 'x':x, 'y':y};
 							board.draw_blob(x, y); 
 						}
@@ -580,6 +616,9 @@ GameEngineClass = Class.extend({
 		// finally handle bombs
 		if (game.specials_to_execute.bombs.length)
 		{
+			// play bomb sound
+			sfx.play('bomb');
+			
 			// draw the explosion
 			board.draw_explosions(game.specials_to_execute.bombs);
 		

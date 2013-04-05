@@ -122,14 +122,17 @@ Blocks_creator = Class.extend({
 	},
 	
 	// rotate a block 90 degrees
-	// TODO check for block size, because 1x1, 1x2, 2x2 (and 2x3?) need to rotate differently from 3x3.
 	rotate_block: function(tiles) 
 	{
 		var new_tiles = [];
+		var topleft = {'x':9, 'y':9};
 		for (var i=0, new_tile=null; i<tiles.length; i++) {
 			var tid = tiles[i].id;
 			tid = (3*tid + 2) % 10; // f(x) = (3x + 2) % 10  <-- this will convert all indexes as if they rotated 90 degrees
 			new_tile = copy(this.tiles[tid]);
+			// save lowest x and y, so we can move the turned tile to the topleft at the end
+			topleft.x = new_tile.x < topleft.x ? new_tile.x : topleft.x;
+			topleft.y = new_tile.y < topleft.y ? new_tile.y : topleft.y;
 			
 			// copy special
 			if (tiles[i].special)
@@ -137,6 +140,17 @@ Blocks_creator = Class.extend({
 			
 			new_tiles.push(new_tile);
 		}
+		
+		// move to topleft if the tile is not there yet. This will make the blocks turn more natural. Especially when they are smaller.
+		if (topleft.x > 0) {
+			for (var i=0; i<new_tiles.length; i++)
+				new_tiles[i].x -= topleft.x;
+		}
+		if (topleft.y > 0) {
+			for (var i=0; i<new_tiles.length; i++)
+				new_tiles[i].y -= topleft.y;
+		}
+		
 		return new_tiles;
 	}
 	

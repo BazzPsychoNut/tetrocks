@@ -5,8 +5,9 @@ $(document).ready(function()
 {
 	// TODO start with loading screen
 
-	// the actual game scripts
-	var game_scripts = [
+	
+	var assets_to_load = [
+        // the actual game scripts
 	    "js/init.js",
 	    "js/core.js",
 	    "js/sound_effects.js",
@@ -15,21 +16,21 @@ $(document).ready(function()
 	    "js/blocks_creator.js",
 	    "js/board.js",
 	    "js/game_engine.js",
-	    "js/input_engine.js"
-    ];
-	
-	var images = [
+	    "js/input_engine.js",
+	    
+	    // images
+	    "img/logo.png",
+	    "img/background.png",
 	    'img/tetris_tiles_20.png', 
-	    'img/explosprite.png'
+	    'img/explosprite.png',
+	    "img/popup.png",
+	    "img/popup_bg.png"
     ];
 	
-	// load all scripts
-	loadAssets(game_scripts, function() {
-		// then load all images
-		loadAssets(images, function() {
-			// then start the game
-			game.new_game();
-		});
+	// load all assets
+	loadAssets(assets_to_load, function() {
+		// then start the game
+		game.new_game();
 	});
 	
 	
