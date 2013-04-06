@@ -89,6 +89,8 @@ GameEngineClass = Class.extend({
 		
 		// then start the game
 		game.new_game();
+		// pause the game so the player will see the controls
+		game.pause_game();
 	},
 	
 	// pause the game
