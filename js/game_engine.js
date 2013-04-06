@@ -42,6 +42,8 @@ GameEngineClass = Class.extend({
 	
 	game_is_over: true,
 	
+	loading: true,
+	
 	// set up for a new game
 	new_game: function() 
 	{
@@ -73,6 +75,20 @@ GameEngineClass = Class.extend({
 		board.draw_total_score(0);
 		
 		game.game_is_over = false;
+	},
+	
+	// the start game action when user presses ENTER after loading has finished
+	start_game: function() {
+		// draw background canvas
+		$('#background').clearCanvas().drawImage({
+			source: "img/background.png",
+			fromCenter: false
+		});
+		
+		game.loading = false;
+		
+		// then start the game
+		game.new_game();
 	},
 	
 	// pause the game

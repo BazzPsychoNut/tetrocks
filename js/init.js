@@ -6,7 +6,7 @@
 
 // background canvas
 $('#background').drawImage({
-	source: "img/background.png",
+	source: "img/loading.png",
 	fromCenter: false
 });
 

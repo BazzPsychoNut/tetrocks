@@ -3,18 +3,14 @@
  */
 $(document).ready(function() 
 {
-	// TODO start with loading screen
-
-	
 	var assets_to_load = [
         // the actual game scripts
-	    "js/init.js",
 	    "js/core.js",
+	    "js/board.js",
 	    "js/sound_effects.js",
 	    "js/spritesheet.js",
 	    "js/explosion_spritesheet.js",
 	    "js/blocks_creator.js",
-	    "js/board.js",
 	    "js/game_engine.js",
 	    "js/input_engine.js",
 	    
@@ -29,8 +25,12 @@ $(document).ready(function()
 	
 	// load all assets
 	loadAssets(assets_to_load, function() {
-		// then start the game
-		game.new_game();
+		// here we place the ENTER button
+		$('#background').drawImage({
+			source: "img/enter.png",
+			x: 0, y: 380,
+			fromCenter: false
+		});
 	});
 	
 	

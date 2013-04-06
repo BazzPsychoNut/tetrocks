@@ -52,9 +52,13 @@ function loadAssets(assetList, callbackFcn) {
 }
 
 function onLoadedCallback(asset, batch) {
+	batch.count++;
+	// update loading progress bar
+	if(typeof board != "undefined")
+		board.draw_timer(batch.count / batch.total);
+	
 	// If the entire batch has been loaded,
 	// call the callback.
-	batch.count++;
 	if(batch.count == batch.total) {
 		batch.cb(asset);
 	}

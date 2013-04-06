@@ -33,6 +33,8 @@ InputEngineClass = Class.extend({
 		
 		gInputEngine.bind(80, 'pause'); // p
 		gInputEngine.bind(77, 'toggle-sound'); // m
+		
+		gInputEngine.bind(13, 'enter'); // enter (to start the game)
 
 		
 		// Adding the event listeners for the appropriate DOM events.
@@ -49,7 +51,7 @@ InputEngineClass = Class.extend({
 		var x = event.offsetX;
 		var y = event.offsetY;
 		
-		if (gInputEngine.button_new_game(x, y) || gInputEngine.button_options(x, y) || gInputEngine.button_resume(x, y))
+		if (gInputEngine.button_new_game(x, y) || gInputEngine.button_options(x, y) || gInputEngine.button_resume(x, y) || gInputEngine.button_enter(x, y))
 			$(this).css({'cursor':'pointer'});
 		else
 			$(this).css({'cursor':'auto'});
@@ -60,27 +62,37 @@ InputEngineClass = Class.extend({
 		var x = event.offsetX;
 		var y = event.offsetY;
 		
+		// main screen
 		if (gInputEngine.button_new_game(x, y))
 			game.new_game();
 		
 		else if (gInputEngine.button_options(x, y))
 			game.pause_game();
 		
+		// paused
 		else if (gInputEngine.button_resume(x, y))
 			game.resume_game();
+		
+		// loading & credits screen
+		else if (gInputEngine.button_enter(x, y))
+			game.start_game();
 		
 	},
 	
 	button_new_game: function(x, y) {
-		return (x >= 28 && x <= 111 && y >= 56 && y <= 80 && ! game.paused);
+		return (x >= 28 && x <= 111 && y >= 56 && y <= 80 && ! game.paused && ! game.loading);
 	},
 
 	button_options: function(x, y) {
-		return (x >= 124 && x <= 209 && y >= 59 && y <= 82 && ! game.paused);
+		return (x >= 124 && x <= 209 && y >= 59 && y <= 82 && ! game.paused && ! game.loading);
 	},
 
 	button_resume: function(x, y) {
 		return (x >= 115 && x <= 207 && y >= 375 && y <= 397 && game.paused);
+	},
+	
+	button_enter: function(x, y) {
+		return (x >= 120 && x <= 208 && y >= 388 && y <= 422 && game.loading);
 	},
 
 	// add event listeners
