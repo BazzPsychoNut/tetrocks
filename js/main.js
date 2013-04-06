@@ -10,12 +10,15 @@ $(document).ready(function()
 	{
 		var assets_to_load = [
 			// images
+			"img/enter.png",
 			"img/logo.png",
 			"img/background.png",
 			'img/tetris_tiles_20.png', 
 			'img/explosprite.png',
 			"img/popup.png",
 			"img/popup_bg.png",
+			"img/high_score_text.png",
+			"img/scores.png",
 			    
 			  // the actual game scripts
 			"js/core.js",
@@ -26,6 +29,7 @@ $(document).ready(function()
 			"js/input_engine.js",
 			"js/sound_effects.js",
 			"js/explosion_spritesheet.js",
+			"js/scores.js"
 		];
 		              	
 	  	// load all assets

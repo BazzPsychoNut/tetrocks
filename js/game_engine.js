@@ -726,8 +726,9 @@ GameEngineClass = Class.extend({
 		clearInterval(game.timer);
 		game.game_is_over = true;
 		
-		// TODO draw something shiny with the score and draw GAME OVER
-		alert('Game over!');
+		// draws GAME OVER and the high scores
+		scores.draw_high_scores();
+		
 		return false;
 	}
 	

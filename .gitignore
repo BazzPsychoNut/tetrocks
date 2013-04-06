@@ -6,3 +6,5 @@
 /doc/daan-designs-2013-03-26/*.psd
 /doc/daan-designs-2013-03-26/*.psd
 /doc/img/*.psd
+/doc/*.sql
+/ajax/connect.php
