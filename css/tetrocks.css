@@ -9,6 +9,8 @@ canvas#popup			{ z-index:5; }
 
 div#explanation			{ width:500px; margin:0 auto; text-align:center; }
 
+input#player_name		{ position:absolute; left:30px; top:405px; background-color:transparent; color:#a2a2a2; border:0; padding:0; width:258px; z-index:0; }
+
 @font-face {
     font-family: 'control_freak';
     src: url('contf.ttf');

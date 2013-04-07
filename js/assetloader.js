@@ -51,7 +51,8 @@ function loadAssets(assetList, callbackFcn) {
 	}
 }
 
-function onLoadedCallback(asset, batch) {
+function onLoadedCallback(asset, batch) 
+{
 	batch.count++;
 	// update loading progress bar
 	if(typeof board != "undefined")

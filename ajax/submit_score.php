@@ -20,17 +20,16 @@ try
     $db = new mysqli();
     include_once 'connect.php';
     
-    // store score
-    $query = $db->prepare("INSERT INTO scores (name, score, create_date, ip) VALUES (?, ?, now(), ?)");
-    $query->bind_param('sis', $_GET['name'], (int) $_GET['score'], $ip);
-    if (! $query->execute())
-        throw new Exception('Error inserting into scores - '.$query->error);
+    // insert score
+    if (! $db->query("insert into scores (name, score, create_date, ip) values ('".$db->real_escape_string($_GET['name'])."', ".$db->real_escape_string($_GET['score']).", now(), '".$db->real_escape_string($ip)."')"))
+        throw new Exception('Error inserting into scores - '.$db->error);
     
     echo '{"success":1}';
 }
 catch (Exception $e)
 {
     // TODO log errors
+    //echo $e->getMessage();
     
     echo '{"error":1}';
 }

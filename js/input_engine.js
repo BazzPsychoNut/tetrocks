@@ -51,7 +51,13 @@ InputEngineClass = Class.extend({
 		var x = event.offsetX;
 		var y = event.offsetY;
 		
-		if (gInputEngine.button_new_game(x, y) || gInputEngine.button_options(x, y) || gInputEngine.button_resume(x, y) || gInputEngine.button_enter(x, y))
+		if (gInputEngine.button_new_game(x, y) || 
+				gInputEngine.button_options(x, y) || 
+				gInputEngine.button_resume(x, y) || 
+				gInputEngine.button_enter(x, y) ||
+				gInputEngine.button_again(x, y) ||
+				gInputEngine.button_submit(x, y)
+			)
 			$(this).css({'cursor':'pointer'});
 		else
 			$(this).css({'cursor':'auto'});
@@ -76,6 +82,14 @@ InputEngineClass = Class.extend({
 		// loading & credits screen
 		else if (gInputEngine.button_enter(x, y))
 			game.start_game();
+
+		// again (= new game) on game over screen
+		else if (gInputEngine.button_again(x, y)) 
+			game.new_game();
+
+		// submit high score on game over screen
+		else if (gInputEngine.button_submit(x, y))
+			scores.submit_score();
 		
 	},
 	
@@ -93,6 +107,14 @@ InputEngineClass = Class.extend({
 	
 	button_enter: function(x, y) {
 		return (x >= 120 && x <= 208 && y >= 388 && y <= 422 && game.loading);
+	},
+	
+	button_again: function(x, y) {
+		return (x >= 208 && x <= 296 && y >= 438 && y <= 463 && ! game.loading && game.game_is_over && ! game.has_high_score);
+	},
+	
+	button_submit: function(x, y) {
+		return (x >= 208 && x <= 296 && y >= 438 && y <= 463 && ! game.loading && game.game_is_over && game.has_high_score);
 	},
 
 	// add event listeners

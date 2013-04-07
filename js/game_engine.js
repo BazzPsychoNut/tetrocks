@@ -44,6 +44,8 @@ GameEngineClass = Class.extend({
 	
 	loading: true,
 	
+	has_high_score: false,
+	
 	// set up for a new game
 	new_game: function() 
 	{
@@ -60,6 +62,7 @@ GameEngineClass = Class.extend({
 		
 		// clear canvas
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		$("#popup").clearCanvas();
 		// setup new board
 		board.init();
 		
@@ -75,6 +78,7 @@ GameEngineClass = Class.extend({
 		board.draw_total_score(0);
 		
 		game.game_is_over = false;
+		game.has_high_score = false;
 	},
 	
 	// the start game action when user presses ENTER after loading has finished

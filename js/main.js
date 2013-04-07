@@ -4,7 +4,7 @@
 
 $(document).ready(function() 
 {
-	// make sure the loading screen is loaded
+	// make sure the loading screen is loaded first
 	var img = new Image();
 	img.onload = function()
 	{
@@ -18,23 +18,23 @@ $(document).ready(function()
 			"img/popup.png",
 			"img/popup_bg.png",
 			"img/high_score_text.png",
-			"img/scores.png",
-			    
-			  // the actual game scripts
-			"js/core.js",
+			"img/enter_score.png",
+			"img/game_over.png",
+			
+			// the actual game scripts
 			"js/board.js",
-			"js/spritesheet.js",
 			"js/blocks_creator.js",
 			"js/game_engine.js",
-			"js/input_engine.js",
 			"js/sound_effects.js",
 			"js/explosion_spritesheet.js",
-			"js/scores.js"
+			"js/scores.js",
+			"js/input_engine.js",
 		];
-		              	
+		
 	  	// load all assets
+		// first the images, then the scripts, to enforce spritesheet.js and thus blocks_creator will work properly
 	  	loadAssets(assets_to_load, function() {
-	  		// here we place the ENTER button
+	  		// place the ENTER button when all assets have been loaded
 	  		$('#background').drawImage({
 	  			source: "img/enter.png",
 	  			x: 0, y: 380,

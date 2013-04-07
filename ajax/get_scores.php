@@ -16,17 +16,26 @@ try
     $result = $db->query("select name, score from scores order by score desc, create_date limit 9")->fetch_all(MYSQLI_ASSOC);
     $json = array();
     $rank = 1;
+    $lowest_score = 100;
     foreach ($result as $row)
     {
         // add player's score if it is in the top 9
-        if ($player_score > $row['score'])
+        if ($player_score > $row['score']) {
             $json[] = array('rank' => $rank++, 'name' => 'YOU', 'score' => $player_score, 'player_score' => 1);
+            $player_score = null;
+        }
         
         $json[] = array('rank' => $rank++, 'name' => $row['name'], 'score' => $row['score']);
         
         if ($rank == 10) // we always return 9 rows
             break;
+        
+        $lowest_score = $row['score'];
     }
+    
+    // for the first few entries add the player score also when it is lowest (required for first entry!)
+    if ($rank < 9 && $player_score < $lowest_score)
+        $json[] = array('rank' => $rank++, 'name' => 'YOU', 'score' => $player_score, 'player_score' => 1);
     
     echo '{"result":'.json_encode($json).'}';
 }
