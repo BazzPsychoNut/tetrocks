@@ -31,7 +31,7 @@ ScoresClass = Class.extend({
 		$("#popup").drawImage({
   			source: "img/game_over_no_button.png",
   			fromCenter: false,
-  			x: 200, y: 425
+  			x: 200, y: 435
   		});
 		
 		$("#loader_gif").show();
