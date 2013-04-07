@@ -63,6 +63,8 @@ GameEngineClass = Class.extend({
 		// clear canvas
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		$("#popup").clearCanvas();
+		$("#loader_gif").hide();
+		
 		// setup new board
 		board.init();
 		

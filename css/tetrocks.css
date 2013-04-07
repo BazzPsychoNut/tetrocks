@@ -10,6 +10,7 @@ canvas#popup			{ z-index:5; }
 div#explanation			{ width:500px; margin:0 auto; text-align:center; }
 
 input#player_name		{ position:absolute; left:30px; top:405px; background-color:transparent; color:#a2a2a2; border:0; padding:0; width:258px; z-index:0; }
+img#loader_gif			{ position:absolute; left:127px; top:207px; z-index:10; }
 
 @font-face {
     font-family: 'control_freak';

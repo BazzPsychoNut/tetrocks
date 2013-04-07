@@ -9,7 +9,7 @@ try
     
     // apparently the player didn't want to save a score
     if (empty($_GET['name']))
-        die;
+        throw new Exception('No name to submit');
     
     if (empty($_GET['score']))
         throw new Exception('No score submitted.');

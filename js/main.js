@@ -20,6 +20,8 @@ $(document).ready(function()
 			"img/high_score_text.png",
 			"img/enter_score.png",
 			"img/game_over.png",
+			"img/loader.gif",
+			"img/game_over_no_button.png",
 			
 			// the actual game scripts
 			"js/board.js",

@@ -13,11 +13,11 @@ try
     $db = new mysqli();
     include_once 'connect.php';
     
-    $result = $db->query("select name, score from scores order by score desc, create_date limit 9")->fetch_all(MYSQLI_ASSOC);
+    $query = $db->query("select name, score from scores order by score desc, create_date limit 9");
     $json = array();
     $rank = 1;
     $lowest_score = 100;
-    foreach ($result as $row)
+    while ($row = $query->fetch_assoc())
     {
         // add player's score if it is in the top 9
         if ($player_score > $row['score']) {
@@ -34,7 +34,7 @@ try
     }
     
     // for the first few entries add the player score also when it is lowest (required for first entry!)
-    if ($rank < 9 && $player_score < $lowest_score)
+    if ($rank < 9 && $player_score < $lowest_score && $player_score > 0)
         $json[] = array('rank' => $rank++, 'name' => 'YOU', 'score' => $player_score, 'player_score' => 1);
     
     echo '{"result":'.json_encode($json).'}';

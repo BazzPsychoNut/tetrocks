@@ -24,17 +24,26 @@ ScoresClass = Class.extend({
 	
 	submit_score: function() 
 	{
+		// prevent doublepost
+		if (! game.has_high_score)
+			return;
+		game.has_high_score = false;
+		$("#popup").drawImage({
+  			source: "img/game_over_no_button.png",
+  			fromCenter: false,
+  			x: 200, y: 425
+  		});
+		
+		$("#loader_gif").show();
+		
 		// get player_name
 		var player_name = $('#player_name').val();
 		
 		// store the name and score
 		$.getJSON("ajax/submit_score.php?score="+encodeURIComponent(game.total_score)+"&name="+encodeURIComponent(player_name), function(data) {
-			if (data.error) {
-				// TODO log
-			}
+			// reset stuff for redrawing the high scores view
 			game.total_score = 0;
-			game.has_high_score = false;
-			$("#player_name").destroy();
+			$("#player_name").remove();
 			
 			// redraw high_scores
 			scores.draw_high_scores();	
@@ -50,10 +59,17 @@ ScoresClass = Class.extend({
   			fromCenter: false
   		});
 		
+		// draw loading gif
+		if (! $("#loader_gif").length)
+			$('#canvas_container').append('<img id="loader_gif" src="img/loader.gif" />');
+		$("#loader_gif").show();
+		
 		scores.setup_font();
 		
 		$.getJSON("ajax/get_scores.php?player_score="+encodeURIComponent(game.total_score), function(high_scores) 
 		{
+			$("#loader_gif").hide();
+			
 			// exit if there was an error fetching the scores
 			if (high_scores.error)
 				return;
